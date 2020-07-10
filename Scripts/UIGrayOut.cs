@@ -25,7 +25,7 @@ namespace Kogane
 		//==============================================================================
 		// プロパティ(static)
 		//==============================================================================
-		public static float GrayOutColor { get; set; } = 0.5f;
+		public static Color GrayOutColor { get; set; } = Color.gray;
 
 		//==============================================================================
 		// 関数
@@ -44,10 +44,10 @@ namespace Kogane
 
 			m_grayOutColor = new Color
 			(
-				m_defaultColor.r * GrayOutColor,
-				m_defaultColor.g * GrayOutColor,
-				m_defaultColor.b * GrayOutColor,
-				m_defaultColor.a
+				m_defaultColor.r * GrayOutColor.r,
+				m_defaultColor.g * GrayOutColor.g,
+				m_defaultColor.b * GrayOutColor.b,
+				m_defaultColor.a * GrayOutColor.a
 			);
 		}
 
