@@ -39,7 +39,6 @@ namespace Kogane
 			m_isInit = true;
 
 			m_canvasRenderer = GetComponent<CanvasRenderer>();
-			m_children       = GetComponentsInChildren<UIGrayOut>( true );
 			m_defaultColor   = m_canvasRenderer.GetColor();
 
 			m_grayOutColor = new Color
@@ -52,6 +51,19 @@ namespace Kogane
 		}
 
 		/// <summary>
+		/// 有効になった時に呼び出されます
+		/// </summary>
+		private void OnEnable()
+		{
+			Init();
+
+			// ゲームオブジェクトが非アクティブになってから再度アクティブになると
+			// CanvasRenderer に設定したカラーがリセットされてしまうので
+			// アクティブになった時にグレーアウトしているかどうかで色を再設定する
+			SetGrayOutWithoutChildrenImpl( IsGrayOut );
+		}
+
+		/// <summary>
 		/// グレーアウトするかどうかを設定します
 		/// </summary>
 		public void SetGrayOutWithoutChildren( bool isGrayOut )
@@ -61,6 +73,14 @@ namespace Kogane
 			if ( IsGrayOut == isGrayOut ) return;
 			IsGrayOut = isGrayOut;
 
+			SetGrayOutWithoutChildrenImpl( isGrayOut );
+		}
+
+		/// <summary>
+		/// グレーアウトするかどうかを設定します
+		/// </summary>
+		private void SetGrayOutWithoutChildrenImpl( bool isGrayOut )
+		{
 			var color = isGrayOut ? m_grayOutColor : m_defaultColor;
 			m_canvasRenderer.SetColor( color );
 		}
@@ -71,6 +91,11 @@ namespace Kogane
 		public void SetGrayOut( bool isGrayOut )
 		{
 			Init();
+
+			if ( m_children == null )
+			{
+				m_children = GetComponentsInChildren<UIGrayOut>( true );
+			}
 
 			for ( var i = 0; i < m_children.Length; i++ )
 			{
