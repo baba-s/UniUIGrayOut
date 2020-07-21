@@ -1,0 +1,17 @@
+{
+    "name": "UniUIGrayOut.Editor",
+    "references": [
+        "GUID:06aceb3b6bdd4714ea84bbd08ee2d4de"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
